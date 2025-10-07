@@ -1,0 +1,197 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2025-08-09T00:00:00.000Z",
+  "__export_source": "pointersvc",
+  "resources": [
+    {
+      "_id": "wrk_pointersvc",
+      "_type": "workspace",
+      "name": "pointersvc"
+    },
+    {
+      "_id": "req_entry",
+      "_type": "request",
+      "parentId": "wrk_pointersvc",
+      "name": "POST /entry-automation",
+      "method": "POST",
+      "url": "http://localhost:8080/entry-automation",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"account_id\": \"0586fa40-3540-4946-aa66-b21a16ea3a65\",\n  \"is_active\": true,\n  \"operation\": {\n    \"type\": \"buy\",\n    \"initial_price_usd\": 113420,\n    \"order_value_usd\": 1,\n    \"order_margin_sats\": 9500,\n    \"contracts_quantity\": 3,\n    \"leverage\": 10,\n    \"price_interval_usd\": 37\n  }\n}"
+      }
+    },
+    {
+      "_id": "req_profit_tp",
+      "_type": "request",
+      "parentId": "wrk_pointersvc",
+      "name": "PUT /accounts/{id}/profit (takeprofit)",
+      "method": "PUT",
+      "url": "{{ _.base_url }}/accounts/{{ _.account_id }}/profit",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"enabled\": true,\n  \"type\": \"takeprofit\",\n  \"profit_pct\": 5.0\n}"
+      }
+    },
+    {
+      "_id": "req_profit_sg",
+      "_type": "request",
+      "parentId": "wrk_pointersvc",
+      "name": "PUT /accounts/{id}/profit (stopgain)",
+      "method": "PUT",
+      "url": "{{ _.base_url }}/accounts/{{ _.account_id }}/profit",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"enabled\": true,\n  \"type\": \"stopgain\",\n  \"profit_pct\": 5.0,\n  \"interval_usd\": 200\n}"
+      }
+    },
+    {
+      "_id": "req_margin",
+      "_type": "request",
+      "parentId": "wrk_pointersvc",
+      "name": "POST /margin-rule",
+      "method": "POST",
+      "url": "http://localhost:8080/margin-rule",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"account_id\": \"0586fa40-3540-4946-aa66-b21a16ea3a65\",\n  \"enabled\": true,\n  \"threshold_val_pct\": 5,\n  \"extra_margin_pct\": 10\n}"
+      }
+    },
+    {
+      "_id": "req_put_/accounts/{id}/features",
+      "_type": "request",
+      "parentId": "wrk_pointersvc",
+      "name": "PUT /accounts/{id}/features",
+      "method": "PUT",
+      "url": "http://localhost:8080/accounts/0586fa40-3540-4946-aa66-b21a16ea3a65/features",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"all_enabled\": true,\n  \"entry_enabled\": true,\n  \"profit_enabled\": true,\n  \"margin_enabled\": false\n}"
+      }
+    },
+    {
+      "_id": "req_patch_/accounts/{id}/features/toggle",
+      "_type": "request",
+      "parentId": "wrk_pointersvc",
+      "name": "PATCH /accounts/{id}/features/toggle",
+      "method": "PATCH",
+      "url": "http://localhost:8080/accounts/0586fa40-3540-4946-aa66-b21a16ea3a65/features/toggle",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"resources\": [\n    \"entry\",\n    \"profit\",\n    \"margin\"\n  ],\n  \"enabled\": false\n}"
+      }
+    },
+    {
+      "_id": "req_get_/accounts/{id}/features",
+      "_type": "request",
+      "parentId": "wrk_pointersvc",
+      "name": "GET /accounts/{id}/features",
+      "method": "GET",
+      "url": "http://localhost:8080/accounts/0586fa40-3540-4946-aa66-b21a16ea3a65/features"
+    },
+    {
+      "_id": "req_get_/accounts/{id}/configs",
+      "_type": "request",
+      "parentId": "wrk_pointersvc",
+      "name": "GET /accounts/{id}/configs",
+      "method": "GET",
+      "url": "{{ _.base_url }}/accounts/{{ _.account_id }}/configs"
+    },
+    {
+      "_id": "req_get_/accounts/{id}/orders",
+      "_type": "request",
+      "parentId": "wrk_pointersvc",
+      "name": "GET /accounts/{id}/orders",
+      "method": "GET",
+      "url": "{{ _.base_url }}/accounts/{{ _.account_id }}/orders"
+    },
+    {
+      "_id": "req_get_/orders/{order_id}/configs",
+      "_type": "request",
+      "parentId": "wrk_pointersvc",
+      "name": "GET /orders/{order_id}/configs",
+      "method": "GET",
+      "url": "{{ _.base_url }}/orders/{ _.some_order_id }/configs"
+    },
+    {
+      "_id": "req_post_/orders/{order_id}/profit",
+      "_type": "request",
+      "parentId": "wrk_pointersvc",
+      "name": "PUT /orders/{order_id}/profit",
+      "method": "PUT",
+      "url": "{{ _.base_url }}/orders/{ _.some_order_id }/profit",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"enabled\": true,\n  \"type\": \"takeprofit\",\n  \"profit_pct\": 4.2\n}"
+      }
+    },
+    {
+      "_id": "req_post_/orders/{order_id}/margin",
+      "_type": "request",
+      "parentId": "wrk_pointersvc",
+      "name": "PUT /orders/{order_id}/margin",
+      "method": "PUT",
+      "url": "{{ _.base_url }}/orders/{ _.some_order_id }/margin",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"enabled\": true,\n  \"threshold_val_pct\": 6,\n  \"extra_margin_pct\": 12\n}"
+      }
+    },
+    {
+      "_id": "req_get_/accounts/{id}/entry",
+      "_type": "request",
+      "parentId": "wrk_pointersvc",
+      "name": "GET /accounts/{id}/entry",
+      "method": "GET",
+      "url": "{{ _.base_url }}/accounts/{{ _.account_id }}/entry"
+    },
+    {
+      "_id": "req_put_/accounts/{id}/entry",
+      "_type": "request",
+      "parentId": "wrk_pointersvc",
+      "name": "PUT /accounts/{id}/entry",
+      "method": "PUT",
+      "url": "{{ _.base_url }}/accounts/{{ _.account_id }}/entry",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"enabled\": true,\n  \"side\": \"buy\",\n  \"initial_price_usd\": 113420,\n  \"order_value_usd\": 1,\n  \"order_margin_sats\": 9500,\n  \"contracts_quantity\": 3,\n  \"leverage\": 10,\n  \"price_interval_usd\": 37,\n  \"rebuild_grid\": true\n}"
+      }
+    },
+    {
+      "_id": "req_patch_/accounts/{id}/entry/enabled",
+      "_type": "request",
+      "parentId": "wrk_pointersvc",
+      "name": "PATCH /accounts/{id}/entry/enabled",
+      "method": "PATCH",
+      "url": "{{ _.base_url }}/accounts/{{ _.account_id }}/entry/enabled",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"enabled\": false\n}"
+      }
+    },
+    {
+      "_id": "req_post_/orders/{order_id}/opened",
+      "_type": "request",
+      "parentId": "wrk_pointersvc",
+      "name": "PUT /orders/{order_id}/opened",
+      "method": "PUT",
+      "url": "{{ _.base_url }}/orders/{ _.some_order_id }/opened",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"account_id\": \"{{ _.account_id }}\",\n  \"position_uid\": \"pos-{{ _.account_id }}\",\n  \"broker_order_id\": \"LN-12345\",\n  \"side\": \"buy\",\n  \"entry_price_usd\": 113420.0,\n  \"liq_price_usd\": 100000.0,\n  \"qty\": 3,\n  \"leverage\": 10,\n  \"initial_margin_sats\": 9500\n}"
+      }
+    },
+    {
+      "_id": "req_put_/accounts/{id}/margin",
+      "_type": "request",
+      "parentId": "wrk_pointersvc",
+      "name": "PUT /accounts/{id}/margin",
+      "method": "PUT",
+      "url": "{{ _.base_url }}/accounts/{{ _.account_id }}/margin",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"enabled\": true,\n  \"threshold_val_pct\": 5,\n  \"extra_margin_pct\": 10\n}"
+      }
+    }
+  ]
+}
